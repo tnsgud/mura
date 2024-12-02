@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createClient, Session } from '@supabase/supabase-js';
+import { useNavigate } from 'react-router';
 
 const supabase = createClient(
   `${import.meta.env.VITE_SUPABASE_PROJECT_URL}`,
@@ -7,10 +8,16 @@ const supabase = createClient(
 );
 
 async function signWithKakao() {
-  await supabase.auth.signInWithOAuth({ provider: 'kakao' });
+  const { data } = await supabase.auth.signInWithOAuth({
+    provider: 'kakao',
+    options: { redirectTo: '/home' },
+  });
+
+  console.log('sign in data:', data);
 }
 
 function App() {
+  const navigate = useNavigate();
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
@@ -27,15 +34,17 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  if (!session) {
-    return (
-      <div>
-        you're not sign in <br />
-        <button onClick={signWithKakao}>click me</button>
-      </div>
-    );
+  if (session) {
+    navigate('/home');
+    return <div>you're sign in!!</div>;
   }
-  return <div>you're sign in!!</div>;
+
+  return (
+    <div>
+      you're not sign in <br />
+      <button onClick={signWithKakao}>click me</button>
+    </div>
+  );
 }
 
 export default App;
