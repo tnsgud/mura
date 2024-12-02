@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { createClient, Session } from '@supabase/supabase-js';
-import { Auth } from '@supabase/auth-ui-react';
-import { ThemeSupa } from '@supabase/auth-ui-shared';
 
 const supabase = createClient(
   `${import.meta.env.VITE_SUPABASE_PROJECT_URL}`,
   `${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
 );
+
+async function signWithKakao() {
+  await supabase.auth.signInWithOAuth({ provider: 'kakao' });
+}
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -26,9 +28,14 @@ function App() {
   }, []);
 
   if (!session) {
-    return <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />;
+    return (
+      <div>
+        you're not sign in <br />
+        <button onClick={signWithKakao}>click me</button>
+      </div>
+    );
   }
-  return <div>hello</div>;
+  return <div>you're sign in!!</div>;
 }
 
 export default App;
