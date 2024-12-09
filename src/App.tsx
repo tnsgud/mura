@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
-import { createClient, Session } from '@supabase/supabase-js';
+import { supabase } from './supabase';
+import { Session } from '@supabase/supabase-js';
 import { useNavigate } from 'react-router';
-
-const supabase = createClient(
-  `${import.meta.env.VITE_SUPABASE_PROJECT_URL}`,
-  `${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-);
 
 async function signWithKakao() {
   const { data } = await supabase.auth.signInWithOAuth({
