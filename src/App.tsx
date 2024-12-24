@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   if (session) {
-    navigate('/home');
+    navigate('/projects');
     return <div>you're sign in!!</div>;
   }
 
