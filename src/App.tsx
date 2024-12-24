@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from './supabase';
+import { supabase } from '@/supabase';
 import { Session } from '@supabase/supabase-js';
 import { useNavigate } from 'react-router';
 
@@ -8,8 +8,6 @@ async function signWithKakao() {
     provider: 'kakao',
     options: { redirectTo: '/home' },
   });
-
-  console.log('sign in data:', data);
 }
 
 function App() {
