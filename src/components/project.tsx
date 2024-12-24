@@ -1,6 +1,13 @@
-import { Tables } from '@/database.types';
+interface Props {
+  data: {
+    id: number;
+    name: string;
+    description: string;
+    signature_code: string;
+  };
+}
 
-function Project(props: { data: Tables<'projects'> }) {
+function Project(props: Props) {
   const { data } = props;
   return (
     <div className='rounded-xl border p-2 shadow-xl'>
