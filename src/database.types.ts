@@ -12,33 +12,33 @@ export type Database = {
       projects: {
         Row: {
           created_at: string
-          delete_at: string | null
+          deleted_at: string | null
           description: string
           id: number
           manager_id: string
           name: string
           signature_code: string
-          update_at: string
+          updated_at: string
         }
         Insert: {
           created_at?: string
-          delete_at?: string | null
+          deleted_at?: string | null
           description?: string
           id?: number
           manager_id?: string
           name: string
           signature_code: string
-          update_at?: string
+          updated_at?: string
         }
         Update: {
           created_at?: string
-          delete_at?: string | null
+          deleted_at?: string | null
           description?: string
           id?: number
           manager_id?: string
           name?: string
           signature_code?: string
-          update_at?: string
+          updated_at?: string
         }
         Relationships: []
       }
