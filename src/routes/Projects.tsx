@@ -1,46 +1,41 @@
-import { supabase } from '../supabase';
+import { supabase } from '@/supabase';
 import { useEffect, useState } from 'react';
-import { Database, Tables } from '../database.types';
+import Project from '@components/project';
+import { QueryData } from '@supabase/supabase-js';
 
-async function test(): Promise<Tables<'test_data'>[]> {
-  const { data, error } = await supabase.from('test_data').select('*');
+const projectsQuery = supabase
+  .from('projects')
+  .select(`id, name, description, signature_code`);
 
-  if (error) {
-    console.log(error);
-  }
+type ProjectsResult = QueryData<typeof projectsQuery>;
 
-  if (data === null) return [];
-
-  return data;
-}
-
-const formatter = new Intl.DateTimeFormat(navigator.language, {
-  dateStyle: 'full',
-  timeStyle: 'long',
-  timeZone: 'Asia/Seoul',
-});
-
-function Home() {
-  const [data, setData] = useState<Tables<'test_data'>[]>([]);
+function Projects() {
+  const [projects, setProjects] = useState<ProjectsResult>([]);
 
   useEffect(() => {
-    test().then((res) => {
-      setData(res);
+    projectsQuery.then((query) => {
+      const { data, error } = query;
+
+      if (error) {
+        throw error;
+      }
+
+      if (data == null) {
+        setProjects([]);
+        return;
+      }
+
+      setProjects(data);
     });
   }, []);
 
   return (
-    <div>
-      {data.map((d) => (
-        <div className='flex gap-10'>
-          <div>{d.id}</div>
-          <div>{d.first_name}</div>
-          <div>{d.second_name}</div>
-          <div>{formatter.format(new Date(d.created_at))}</div>
-        </div>
+    <div className='grid grid-cols-3 gap-x-5 gap-y-5 px-5 py-5'>
+      {projects.map((p) => (
+        <Project data={p} />
       ))}
     </div>
   );
 }
 
-export default Home;
+export default Projects;
