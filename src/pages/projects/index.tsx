@@ -1,7 +1,7 @@
-import { supabase } from '@/supabase';
+import { supabase } from '@/shared/lib/supabase';
 import { useEffect, useState } from 'react';
-import Project from '@components/project';
-import { Tables } from '@/database.types';
+import Project from '@features/projects/view/project';
+import { Tables } from '@shared/types/database.types';
 
 type PartialProject = Omit<
   Tables<'projects'>,
@@ -13,7 +13,7 @@ const projectsQuery = supabase
   .select(`id, name, description, signature_code`)
   .returns<PartialProject[]>();
 
-function Projects() {
+function ProjectsPage() {
   const [projects, setProjects] = useState<PartialProject[]>([]);
 
   useEffect(() => {
@@ -42,4 +42,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default ProjectsPage;
