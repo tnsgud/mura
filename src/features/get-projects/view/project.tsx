@@ -10,7 +10,7 @@ interface Props {
 function Project(props: Props) {
   const { data } = props;
   return (
-    <div className='rounded-xl border p-2 shadow-xl'>
+    <div className='rounded-xl border p-2 transition-shadow duration-200 hover:shadow-xl'>
       <div className='mb-5 flex flex-row items-center justify-between'>
         <div className='text-2xl font-bold'>{data.name}</div>
         <div className='rounded-lg bg-red-500 p-2 text-sm font-bold text-white'>
