@@ -1,0 +1,22 @@
+{
+  "root": [
+    "./src/main.tsx",
+    "./src/vite-env.d.ts",
+    "./src/app/app.tsx",
+    "./src/app/router/approuter.tsx",
+    "./src/app/router/route.tsx",
+    "./src/features/get-projects/model/projects.ts",
+    "./src/features/get-projects/model/projectsapi.ts",
+    "./src/features/get-projects/model/projectsloader.ts",
+    "./src/features/get-projects/model/projectsstore.ts",
+    "./src/features/get-projects/view/project.tsx",
+    "./src/features/get-projects/view/projectlist.tsx",
+    "./src/features/get-projects/view-model/usegetprojectsviewmodel.ts",
+    "./src/pages/login/index.tsx",
+    "./src/pages/projects/index.tsx",
+    "./src/shared/lib/supabase.ts",
+    "./src/shared/lib/suspensefriendly.ts",
+    "./src/shared/types/database.types.ts"
+  ],
+  "version": "5.6.3"
+}
