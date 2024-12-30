@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
-import { supabase } from './supabase';
+import { supabase } from '@lib/supabase';
 import { Session } from '@supabase/supabase-js';
 import { useNavigate } from 'react-router';
 
 async function signWithKakao() {
-  const { data } = await supabase.auth.signInWithOAuth({
+  await supabase.auth.signInWithOAuth({
     provider: 'kakao',
     options: { redirectTo: '/home' },
   });
-
-  console.log('sign in data:', data);
 }
 
-function App() {
+function LoginPage() {
   const navigate = useNavigate();
   const [session, setSession] = useState<Session | null>(null);
 
@@ -31,7 +29,7 @@ function App() {
   }, []);
 
   if (session) {
-    navigate('/home');
+    navigate('/projects');
     return <div>you're sign in!!</div>;
   }
 
@@ -43,4 +41,4 @@ function App() {
   );
 }
 
-export default App;
+export default LoginPage;
